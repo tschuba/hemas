@@ -1,0 +1,63 @@
+# open evcc at http://evcc.local:7070
+network:
+  schema: http
+  host: evcc.local # .local suffix announces the hostname on MDNS
+  port: 7070
+
+log: debug
+levels:
+  cache: error
+
+# unique installation id
+plant: f478939d01e35c02569f737dea4b76c2f6d9d4f5cae3aa3814ecf9c6588dadab
+
+interval: 30s # control cycle interval
+
+meters:
+- type: template
+  template: sungrow-hybrid 
+  id: 1  
+  host: 192.168.178.55  
+  port: 502  
+  usage: grid  
+  modbus: tcpip  
+  timeout: 10s  
+  name: grid1
+- type: template
+  template: sungrow-hybrid 
+  id: 1  
+  host: 192.168.178.55  
+  port: 502  
+  usage: pv  
+  modbus: tcpip  
+  timeout: 10s  
+  name: pv2
+- type: template
+  template: sungrow-hybrid 
+  id: 1  
+  host: 192.168.178.55  
+  port: 502  
+  usage: battery  
+  modbus: tcpip  
+  timeout: 10s  
+  name: battery3
+
+vehicles:
+- type: template
+  template: enyaq 
+  title: Enyaq  
+  user: tschuba@gmail.com  
+  password: rdy0xfa8YTK.wmx9ure  
+  vin: TMBJC7NY7PF054857  
+  capacity: 77  
+  timeout: 10s  
+  name: ev4
+
+site:
+  title: Zuhause
+  meters:
+    grid: grid1
+    pv:
+    - pv2
+    battery:
+    - battery3
